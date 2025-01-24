@@ -21,11 +21,11 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t my-health-management-app:latest .
+          docker build -t sholly333/my-docker-image:tagname .  # Use the correct image name
 
       - name: Push Docker image
         run: |
-          docker push my-health-management-app:latest  # Optional, if you still want to push to Docker Hub
+          docker push sholly333/my-docker-image:tagname  # Push to Docker Hub
 
       - name: Set up SSH
         run: |
@@ -39,6 +39,6 @@ jobs:
           ssh -v -o StrictHostKeyChecking=no ubuntu@ec2-54-193-158-129.us-west-1.compute.amazonaws.com "
             cd /path/to/your/app &&  # Change this to your app directory
             git pull origin master &&  # Pull the latest code
-            docker build -t my-health-management-app:latest . &&
-            docker run -d --rm --name my-health-management-app my-health-management-app:latest
+            docker build -t sholly333/my-docker-image:tagname . &&
+            docker run -d --rm --name my-health-management-app sholly333/my-docker-image:tagname
           "
