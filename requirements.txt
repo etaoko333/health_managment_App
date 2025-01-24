@@ -1,9 +1,8 @@
 streamlit
-google-generativeai
 python-dotenv
-langchain
+langchain  # if still needed
 PyPDF2
 chromadb
 pdf2image
 faiss-cpu
-langchain_google_genai
+boto3  # Add the AWS SDK
