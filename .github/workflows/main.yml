@@ -32,3 +32,7 @@ jobs:
       - name: Push Docker image
         run: |
           docker push sholly333/my-docker-image:latest
+
+     - name: Deploy to Server
+        run: |
+          ssh -o StrictHostKeyChecking=no ubuntu@ec2-54-193-158-129.us-west-1.compute.amazonaws.com "docker pull sholly333/my-health-management-app:latest && docker run -d --rm --name my-health-management-app sholly333/my-health-management-app:latest"
