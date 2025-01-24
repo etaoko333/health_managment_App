@@ -27,8 +27,8 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t my-docker-image:latest .
+          docker build -t sholly333/my-docker-image:latest .
 
       - name: Push Docker image
         run: |
-          docker push my-docker-image:latest
+          docker push sholly333/my-docker-image:latest
