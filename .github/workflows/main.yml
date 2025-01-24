@@ -33,6 +33,13 @@ jobs:
         run: |
           docker push sholly333/my-docker-image:latest
 
-      - name: Deploy to Server  # Ensure correct indentation here
+      - name: Set up SSH
         run: |
-          ssh -o StrictHostKeyChecking=no ubuntu@ec2-54-193-158-129.us-west-1.compute.amazonaws.com "docker pull sholly333/my-health-management-app:latest && docker run -d --rm --name my-health-management-app sholly333/my-health-management-app:latest"
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 400 ~/.ssh/id_rsa
+          ssh-keyscan -H ec2-54-193-158-129.us-west-1.compute.amazonaws.com >> ~/.ssh/known_hosts
+
+      - name: Deploy to Server
+        run: |
+          ssh -v -o StrictHostKeyChecking=no ubuntu@ec2-54-193-158-129.us-west-1.compute.amazonaws.com "docker pull sholly333/my-health-management-app:latest && docker run -d --rm --name my-health-management-app sholly333/my-health-management-app:latest"
